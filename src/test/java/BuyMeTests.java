@@ -18,90 +18,91 @@ public class BuyMeTests {
 
     @BeforeClass
     public static void openBuyMe() throws Exception {
-        String cwd = System.getProperty("user.dir");
-        ExtentSparkReporter htmlReporter = new ExtentSparkReporter( cwd + "\\extent.html");
+        ExtentSparkReporter htmlReporter = new ExtentSparkReporter(  "/Users/karingrabli/IdeaProjects/BuyMeAutomation/extent.html");
         XMLManager.extent.attachReporter(htmlReporter);
         DriverSingleton.openURL();
+        XMLManager.test =  XMLManager.extent.createTest("BuyMeTest","BuyMe website sanity test");
     }
 
 //Intro screen
 
     @Test
-    public void test01_RegistrationPageTest() throws Exception {
+    public void test01_enterOrRegisterTest() throws Exception {
         XMLManager.test.log(Status.INFO,"introduction page");
-        introPage.getToRegistrationPage();
+        introPage.pressEnterSlashRegister();
     }
+    @Test
+    public void test02_pressRegisterTest() throws Exception{
+        introPage.clickRegister();
+    }
+
     //registration screen
 
     @Test
-    public void test02_enterPrivateInformationTest() throws Exception {
+    public void test03_enterPrivateInformationTest() throws Exception {
         XMLManager.test.log(Status.INFO,"registration page");
         registrationPage.enterCredentials();
     }
     @Test
-    public void test03_clickAgreeToTermsTest() throws Exception {
+    public void test04_clickAgreeToTermsTest() throws Exception {
         registrationPage.clickAgreeToTerms();
     }
 
     //Home Screen
     @Test
-    public void test04_selectPriceTest() throws Exception {
+    public void test05_selectPriceTest() throws Exception {
         XMLManager.test.log(Status.INFO,"home page");
         homePage.enterPrice();
     }
     @Test
-    public void test05_selectRegionTest() throws Exception {
+    public void test06_selectRegionTest() throws Exception {
         homePage.pickRegion();
     }
     @Test
-    public void test06_selectCategoryTest() throws Exception {
+    public void test07_selectCategoryTest() throws Exception {
         homePage.pickCategory();
     }
     @Test
-    public void test07_clickFindGift() throws Exception {
+    public void test08_clickFindGift() throws Exception {
         homePage.pressFindMeAGift();
     }
 
     //Pick business
     @Test
-    public void test08_assertURL()throws Exception{
+    public void test09_assertURL()throws Exception{
         businessPage.assertURL();
     }
 
     @Test
-    public void test09_pickBusinessTest() throws Exception {//change numbers
+    public void test10_pickBusinessTest() throws Exception {//change numbers
         XMLManager.test.log(Status.INFO,"business page");
         businessPage.pickBusiness();
     }
     @Test
-    public void test10_enterSumTest() throws Exception {
+    public void test11_enterSumTest() throws Exception {
         businessPage.enterSum();
     }
     @Test
-    public void test11_pressPickTest()throws Exception{
+    public void test12_pressPickTest()throws Exception{
         businessPage.pickPick();
     }
     //Sender & Receiver information screen
     @Test
-    public void test12_pickSomeoneElseTest()throws Exception{
+    public void test13_pickSomeoneElseTest()throws Exception{
         XMLManager.test.log(Status.INFO,"sender and receiver information page");
         senderReceiverInfoPage.pickSomeoneElse();
     }
     @Test
-    public void test13_giftReceiverTest()throws Exception{
+    public void test14_giftReceiverTest()throws Exception{
         senderReceiverInfoPage.giftReceiver();
     }
     @Test
-    public void test14_pickEventTest() throws Exception{
+    public void test15_pickEventTest() throws Exception{
         senderReceiverInfoPage.pickEvent();
     }
     @Test
-    public void test15_enterBlessingTest() throws Exception{
+    public void test16_enterBlessingTest() throws Exception{
         senderReceiverInfoPage.enterBlessing();
-    }
-    @Test
-    public void test16_uploadPictureTest()throws Exception{
-
     }
     @Test
     public void test17_pressContinueTest()throws Exception{
@@ -129,7 +130,7 @@ public class BuyMeTests {
     }
 
     @AfterClass
-    public void test22_finish() throws Exception {
+    public void test23_finish() throws Exception {
         DriverSingleton.getDriverInstance().quit();
         XMLManager.extent.flush();
     }

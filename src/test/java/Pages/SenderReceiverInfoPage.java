@@ -11,7 +11,7 @@ public class SenderReceiverInfoPage extends BasePage {
         sendKeysToElement(Locators.RECEIVER_NAME_BUTTON, Constants.RECEIVER_NAME);
     }
     public void pickEvent() throws Exception {
-        scrollToElement(Locators.WHATS_THE_OCCASION_BUTTON);
+        scrollToElement(Locators.WHATS_THE_OCCASION_BUTTON,"מתנות סוף שנה");
     }
     public void enterBlessing() throws Exception {
         sendKeysToElement(Locators.BLESSING_BUTTON, Constants.BLESSING);

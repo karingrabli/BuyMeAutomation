@@ -28,7 +28,7 @@ public class DriverSingleton {
         return driver;
     }
     private static String getData (String keyName) throws Exception{
-        File fXmlFile = new File("/Users/karingrabli/IdeaProjects/BuyMeAutomation.xml");
+        File fXmlFile = new File("/Users/karingrabli/Desktop/data.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(fXmlFile);

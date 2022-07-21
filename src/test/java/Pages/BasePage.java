@@ -1,5 +1,6 @@
 package Pages;
 import driverSingleton.*;
+import org.openqa.selenium.support.ui.Select;
 import xmlmanager.*;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import org.openqa.selenium.*;
@@ -11,9 +12,15 @@ import org.openqa.selenium.TakesScreenshot;
 import java.util.NoSuchElementException;
 
 public class BasePage {
-    public void scrollToElement (By locator) throws Exception { // this method receives a locator it scrolls to the wanted element
-        WebElement element = DriverSingleton.getDriverInstance().findElement(locator);
-        ((JavascriptExecutor) DriverSingleton.getDriverInstance()).executeScript("arguments[0].scrollIntoView(true);", element);
+
+    public void scrollToElement (By locator, String text) throws Exception { // this method receives a locator it scrolls to the wanted element
+
+       try{ Select select = new Select(DriverSingleton.getDriverInstance().findElement(locator));
+        select.selectByVisibleText(text);
+       }catch (NoSuchElementException e){
+           String timeNow = String.valueOf(System.currentTimeMillis());
+           XMLManager.test.info("element was not found", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(DriverSingleton.getDriverInstance() , timeNow)).build());
+       }
     }
     public void clickElement(By locator) throws Exception { // clicks element, if unsuccessful it will take a screenshot
         try{
@@ -25,7 +32,12 @@ public class BasePage {
     }
 
     public void sendKeysToElement(By locator, String text) throws Exception { //writes given text
-        getWebElement(locator).sendKeys(text);
+       try {
+           getWebElement(locator).sendKeys(text);
+       }catch (NoSuchElementException e){
+           String timeNow = String.valueOf(System.currentTimeMillis());
+           XMLManager.test.info("element was not found", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(DriverSingleton.getDriverInstance() , timeNow)).build());
+       }
     }
 
     private WebElement getWebElement(By locator) throws Exception { //creates a driver instance and finds element, instead of constantly creating new instances
