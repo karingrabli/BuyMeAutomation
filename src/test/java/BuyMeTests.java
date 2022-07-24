@@ -5,8 +5,7 @@ import driverSingleton.DriverSingleton;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import xmlmanager.XMLManager;
-
+import extentreports.ExtentReportss;
 
 public class BuyMeTests {
     IntroPage introPage = new IntroPage();
@@ -19,16 +18,16 @@ public class BuyMeTests {
     @BeforeClass
     public static void openBuyMe() throws Exception {
         ExtentSparkReporter htmlReporter = new ExtentSparkReporter(  "/Users/karingrabli/IdeaProjects/BuyMeAutomation/extent.html");
-        XMLManager.extent.attachReporter(htmlReporter);
+        ExtentReportss.extent.attachReporter(htmlReporter);
         DriverSingleton.openURL();
-        XMLManager.test =  XMLManager.extent.createTest("BuyMeTest","BuyMe website sanity test");
+        ExtentReportss.test =  ExtentReportss.extent.createTest("BuyMeTest","BuyMe website sanity test");
     }
 
 //Intro screen
 
     @Test
     public void test01_enterOrRegisterTest() throws Exception {
-        XMLManager.test.log(Status.INFO,"introduction page");
+        ExtentReportss.test.log(Status.INFO,"introduction page");
         introPage.pressEnterSlashRegister();
     }
     @Test
@@ -40,7 +39,7 @@ public class BuyMeTests {
 
     @Test
     public void test03_enterPrivateInformationTest() throws Exception {
-        XMLManager.test.log(Status.INFO,"registration page");
+        ExtentReportss.test.log(Status.INFO,"registration page");
         registrationPage.enterCredentials();
     }
     @Test
@@ -51,7 +50,7 @@ public class BuyMeTests {
     //Home Screen
     @Test
     public void test05_selectPriceTest() throws Exception {
-        XMLManager.test.log(Status.INFO,"home page");
+        ExtentReportss.test.log(Status.INFO,"home page");
         homePage.enterPrice();
     }
     @Test
@@ -75,7 +74,7 @@ public class BuyMeTests {
 
     @Test
     public void test10_pickBusinessTest() throws Exception {//change numbers
-        XMLManager.test.log(Status.INFO,"business page");
+        ExtentReportss.test.log(Status.INFO,"business page");
         businessPage.pickBusiness();
     }
     @Test
@@ -89,7 +88,7 @@ public class BuyMeTests {
     //Sender & Receiver information screen
     @Test
     public void test13_pickSomeoneElseTest()throws Exception{
-        XMLManager.test.log(Status.INFO,"sender and receiver information page");
+        ExtentReportss.test.log(Status.INFO,"sender and receiver information page");
         senderReceiverInfoPage.pickSomeoneElse();
     }
     @Test
@@ -132,7 +131,7 @@ public class BuyMeTests {
     @AfterClass
     public void test23_finish() throws Exception {
         DriverSingleton.getDriverInstance().quit();
-        XMLManager.extent.flush();
+        ExtentReportss.extent.flush();
     }
 
 }

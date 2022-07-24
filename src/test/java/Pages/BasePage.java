@@ -1,7 +1,7 @@
 package Pages;
 import driverSingleton.*;
+import extentreports.ExtentReportss;
 import org.openqa.selenium.support.ui.Select;
-import xmlmanager.*;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import org.openqa.selenium.*;
 import java.io.File;
@@ -19,7 +19,7 @@ public class BasePage {
         select.selectByVisibleText(text);
        }catch (NoSuchElementException e){
            String timeNow = String.valueOf(System.currentTimeMillis());
-           XMLManager.test.info("element was not found", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(DriverSingleton.getDriverInstance() , timeNow)).build());
+           ExtentReportss.test.info("element was not found", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(DriverSingleton.getDriverInstance() , timeNow)).build());
        }
     }
     public void clickElement(By locator) throws Exception { // clicks element, if unsuccessful it will take a screenshot
@@ -27,7 +27,7 @@ public class BasePage {
         getWebElement(locator).click();
         }catch (NoSuchElementException e){
             String timeNow = String.valueOf(System.currentTimeMillis());
-            XMLManager.test.info("element was not found", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(DriverSingleton.getDriverInstance() , timeNow)).build());
+            ExtentReportss.test.info("element was not found", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(DriverSingleton.getDriverInstance() , timeNow)).build());
         }
     }
 
@@ -36,7 +36,7 @@ public class BasePage {
            getWebElement(locator).sendKeys(text);
        }catch (NoSuchElementException e){
            String timeNow = String.valueOf(System.currentTimeMillis());
-           XMLManager.test.info("element was not found", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(DriverSingleton.getDriverInstance() , timeNow)).build());
+           ExtentReportss.test.info("element was not found", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(DriverSingleton.getDriverInstance() , timeNow)).build());
        }
     }
 
